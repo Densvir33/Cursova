@@ -15,7 +15,7 @@ using S22.Imap;
 using ImapClient = S22.Imap.ImapClient;
 
 // This is where the magic happens
-
+//Ти хто ?
 namespace MailClient
 {
     class Program
