@@ -83,10 +83,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAttachmentPopup.xaml.cs">
+      <DependentUpon>AddAttachmentPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmailIsSentPopup.xaml.cs">
       <DependentUpon>EmailIsSentPopup.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddAttachmentPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EncryptionPasswordPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ErrorPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InboxWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,7 +109,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="LoginPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -103,22 +118,35 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EncryptionClass.cs" />
+    <Compile Include="EncryptionPasswordPopup.xaml.cs">
+      <DependentUpon>EncryptionPasswordPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ErrorPopup.xaml.cs">
       <DependentUpon>ErrorPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InboxWindow.xaml.cs">
+      <DependentUpon>InboxWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginConfirmedPopup.xaml.cs">
       <DependentUpon>LoginConfirmedPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="LoginPopup.xaml.cs">
+      <DependentUpon>LoginPopup.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="EmailIsSentPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

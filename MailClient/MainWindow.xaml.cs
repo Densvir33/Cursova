@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MailClient
@@ -20,74 +20,107 @@ namespace MailClient
     /// </summary>
     public partial class MainWindow : Window
     {
-       
-        public static bool RememberDetailsCheckBoxState = false;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        // Button and Textbox methods
+
+        private void ToAddressTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void SubjectTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void BodyTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Exits the program when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// When the AddAttachmentButton is clicked, show the AddAttachmentpopup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddAttachmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a new instance of the AddAttachmentPopup
+            AddAttachmentPopup popup = new AddAttachmentPopup();
+
+            // Show the popup
+            popup.Show();
+        }
+
+        /// <summary>
+        /// Logs in.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Assign the variables
-            Program.FromAddress = FromAddressTextBox.Text;
-            Program.FromPass = FromPasswordPasswordBox.Password;
-            string EncryptionPassword = EncryptionPasswordPasswordBox.Password;
-
-            // Save the details if the user wants so
-            if (RememberDetailsCheckBoxState == true)
+            // If the credentials are saved, open those, else open the login popup
+            if (File.Exists("Credentials") == true)
             {
-                try
-                {
-                    Program.WriteCredentialsToFile(Program.FromAddress, Program.FromPass, "Credentials", EncryptionPassword);
-                }
-                catch (Exception exception)
-                {
-                    // Create the ErrorMessage
-                    string ErrorMessage = "ERROR 50001:" + "\n" + exception.ToString();
+                // Ask the Encryption password using the EncryptionPasswordPopup
+                EncryptionPasswordPopup popup = new EncryptionPasswordPopup();
 
-                    // Show the ErrorMessage to the user
-                    Program.ErrorPopupCall(ErrorMessage);
-
-                    // Stop executing this method
-                    return;
-                }
+                //Show the popup
+                popup.Show();
             }
-
-            // If the login is succesfull, show the popup
-            if (!(string.IsNullOrEmpty(Program.FromAddress)) && !(string.IsNullOrEmpty(Program.FromPass)))
+            else
             {
-                Program.LoggedInPopupCall();
+                // Create a new instance of the LoginPopup class
+                LoginPopup loginPopup = new LoginPopup();
+
+                // Show the popup
+                loginPopup.Show();
             }
-
-            // Close the window
-            Close();
         }
-        private void HandleCheck(object sender, RoutedEventArgs e)
-        {
-            RememberDetailsCheckBoxState = true;
 
-            // Show the EncryptionPasswordLabel and PasswordBox
-            EncryptionPasswordLabel.Visibility = Visibility.Visible;
-            EncryptionPasswordPasswordBox.Visibility = Visibility.Visible;
-        }
-        private void HandleUncheck(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Prepares variables to call SendEmail to and the email
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            RememberDetailsCheckBoxState = false;
+            if (!(string.IsNullOrEmpty(Program.FromAddress)))
+            {
+                string ToAddress, Subject, Body, CC, S_Attachment;
 
-            // Hide the EncryptionPasswordLabel and PasswordBox
-            EncryptionPasswordLabel.Visibility = Visibility.Hidden;
-            EncryptionPasswordPasswordBox.Visibility = Visibility.Hidden;
-        }
-        private void FromAddressTextBox_TextChanged(object sender, RoutedEventArgs e)
-        {
+                // Assign the variables
+                ToAddress = ToAddressTextBox.Text;
+                Subject = SubjectTextBox.Text;
+                Body = BodyTextBox.Text;
+                CC = CCAddressTextBox.Text;
+                S_Attachment = AddAttachmentPopup.AttachmentPath;
 
+                // Call SendEmail to send the email
+                Program.SendEmail(ToAddress, Program.FromAddress, Program.FromPass, Subject, Body, CC, S_Attachment);
+
+                // Close this window
+                Close();
+            }
+            else
+            {
+                Program.ErrorPopupCall("Be sure to log in!");
+            }
         }
     }
 }
-
