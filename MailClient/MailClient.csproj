@@ -86,6 +86,14 @@
     <Compile Include="EmailIsSentPopup.xaml.cs">
       <DependentUpon>EmailIsSentPopup.xaml</DependentUpon>
     </Compile>
+    <Page Include="ErrorPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginConfirmedPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,6 +103,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EncryptionClass.cs" />
+    <Compile Include="ErrorPopup.xaml.cs">
+      <DependentUpon>ErrorPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginConfirmedPopup.xaml.cs">
+      <DependentUpon>LoginConfirmedPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
