@@ -89,97 +89,97 @@ namespace MailClient
             // First check if all the TextBoxes are filled in and then check the host.
             if (CheckArguments(ToAddress, FromAddress, FromPass, Subject, Body) == true && CheckEmailHost(FromAddress) == true)
             {
-                // Create a new instance of the SmtpClient class
+                // Створіть новий екземпляр класу SmtpClient
                 SmtpClient smtpClient = new SmtpClient
                 {
-                    // Set the host
+                    // Встановыть хост
                     Host = Host,
 
-                    // Set the port
+                    //Встановіть порт
                     Port = Port,
 
-                    // Enable SSL
+                    // Увімкнути SSL
                     EnableSsl = true,
 
-                    // Assign the delivery method
+                    // Призначте спосіб доставки
                     DeliveryMethod = SmtpDeliveryMethod.Network,
 
-                    // Assign the credentials
+                    //Присвоїти облікові дані
                     Credentials = new NetworkCredential(FromAddress, FromPass),
 
-                    // Set the timeout
+                    // Встановіть час очікування
                     Timeout = 20000
                 };
 
-                // Create a new MailMessage, called Message, and add the properties
+                //Створіть новий MailMessage, який називається Message, та додайте властивості
                 MailMessage Message = new MailMessage(FromAddress, ToAddress, Subject, Body);
 
-                // If there's something in the CC tab, add it to Message
+                // Якщо щось є на вкладці CC, додайте це до повідомлення
                 if (!(string.IsNullOrEmpty(CC)))
                 {
-                    // First convert string CC to MailAddress CC
+                    // Спочатку перетворіть рядок CC у MailAddress CC
                     MailAddress Copy = new MailAddress(CC);
 
-                    // Add the Copy to the message
+                    // Додайте копію до повідомлення
                     Message.CC.Add(Copy);
                 }
 
-                // If there's something in the S_Attachment, add it to Message
+                // Якщо щось є в S_Attachment, додайте це до повідомлення
                 if (!(string.IsNullOrEmpty(S_Attachment)))
                 {
-                    // Create a new Attachment
+                    // Створіть новий вкладення
                     Attachment File = new Attachment(S_Attachment);
 
-                    // Add it to Message
+                    // Додайте його до повідомлення
                     Message.Attachments.Add(File);
                 }
 
-                // Send the message
+                // Надішліть повідомлення
                 try
                 {
                     smtpClient.Send(Message);
                 }
                 catch (Exception exception)
                 {
-                    // Create the ErrorMessage
+                    // Створіть повідомлення про помилку
                     string ErrorMessage = "ERROR 20001:" + "\n" + exception.ToString();
 
-                    // Show the ErrorMessage to the user
+                    // Показати повідомлення про помилку користувачеві
                     ErrorPopupCall(ErrorMessage);
 
-                    // Cleanup
+                    // Прибрати
                     Message.Dispose();
 
-                    // Stop executing this method
+                    // Припиніть виконувати цей метод
                     return;
                 }
 
-                // Cleanup
+                // Прибирати
                 Message.Dispose();
 
-                // Call this method to notify the user that the message has been sent
+                // Зателефонуйте цим методом, щоб повідомити користувача про те, що повідомлення надіслано
                 EmailIsSentPopupCall();
             }
             else
             {
-                // If not, stop the execution of this method.
+                // Якщо ні, зупиніть виконання цього методу.
                 return;
             }
         }
 
         /// <summary>
-        /// Checks the host and if the enterd FromAddress is actually an address.
+        /// Перевіряє хост і чи справді введена адреса з адреси є адресою.
         /// </summary>
         /// <param name="FromAddress">The address of the sender of the email</param>
         private static bool CheckEmailHost(string FromAddress)
         {
-            // First split the FromAddress between the @
+            // Спочатку розділіть FromAddress між @
             string[] splitFromAddress = FromAddress.Split('@');
 
-            // Then check if the splitFromAddress[1] exists
+            // Потім перевірте, чи існує splitFromAddress [1]
             if (splitFromAddress.Length == 2)
             {
-                // This switch checks which host it is, and assigns the Host and Port variables to the corresponding Host and Port
+                // Цей комутатор перевіряє, який це хост, і призначає змінні Host і Port відповідним Host і Port
                 switch (splitFromAddress[1])
                 {
                     case "gmail.com":
@@ -211,7 +211,7 @@ namespace MailClient
         }
 
         /// <summary>
-        /// Checks if all the arguments are not null nor empty
+        /// Перевіряє, чи всі аргументи не є нульовими чи порожніми
         /// </summary>
         /// <param name="ToAddress"></param>
         /// <param name="FromAddress"></param>
@@ -221,7 +221,7 @@ namespace MailClient
         /// <returns></returns>
         private static bool CheckArguments(string ToAddress, string FromAddress, string FromPass, string subject, string body)
         {
-            // Check for all arguments if they're null or empty, of they all aren't null or empty return true else return false and an error message
+            // Перевірте всі аргументи, якщо вони є нульовими або порожніми, з усіх вони не є нульовими або порожніми, поверніть true, інакше поверніть false і повідомлення про помилку
             if (!(string.IsNullOrEmpty(FromAddress)) && !(string.IsNullOrEmpty(ToAddress)) && !(string.IsNullOrEmpty(FromPass)) && !(string.IsNullOrEmpty(subject)) && !(string.IsNullOrEmpty(body)))
             {
                 return true;
@@ -238,53 +238,53 @@ namespace MailClient
        
         public static List<MailMessage> GetAllMessages(string FromAddress, string FromPass)
         {
-            // Check the host
+            // Перевірте хоста
             if (CheckEmailHostIMAP(FromAddress) == true && !(string.IsNullOrEmpty(FromPass)))
             {
                 try
                 {
-                    // Create a new ImapClient
+                    // Створити ImapClient
                     ImapClient client = new ImapClient(Host, Port, FromAddress, FromPass, S22.Imap.AuthMethod.Login, true);
 
-                    // Get the uids
+                    // отримати uids
                     IEnumerable<uint> uids = client.Search(S22.Imap.SearchCondition.All());
 
-                    // Get the messages
+                    // Отримуйте повідомлення
                     IEnumerable<MailMessage> Messages = client.GetMessages(uids);
 
-                    // Convert to list
+                    // Конвертувати в  list
                     List<MailMessage> MessagesList = Messages.ToList<MailMessage>();
 
-                    // Return them
+                    //Поверніть їх
                     return MessagesList;
                 }
                 catch (Exception exception)
                 {
-                    // Create the error message
+                    // Створіть повідомлення про помилку
                     string ErrorMessage = "ERROR 60002" + "\n" + exception.ToString();
 
-                    // Show the error message
+                    // Показати повідомлення про помилку
                     Program.ErrorPopupCall(ErrorMessage);
 
-                    // Make an empty list to return
+                    // Складіть порожній список для повернення
                     List<MailMessage> Stop = new List<MailMessage>();
 
-                    // Stop executing this method
+                    // Припиніть виконувати цей метод
                     return Stop;
                 }
             }
             else
             {
-                // Create the error message
+                // Створіть повідомлення про помилку
                 string ErrorMessage = "ERROR 60003" + "\n" + "EmailHostIMAP(FromAddress) returned false";
 
-                // Show the error message
+                // Показати повідомлення про помилку
                 Program.ErrorPopupCall(ErrorMessage);
 
-                // Make an empty list to return
+                //Складіть порожній список для повернення
                 List<MailMessage> Stop = new List<MailMessage>();
 
-                // Stop executing this method
+                // Припиніть виконувати цей метод
                 return Stop;
             }
         }
@@ -293,29 +293,29 @@ namespace MailClient
         /// <param name="FromAddress"></param>
         private static bool CheckEmailHostIMAP(string FromAddress)
         {
-            // Create splitFromAddress array to store the splitted FromAddress in
+            // Створіть масив splitFromAddress для зберігання розділеного FromAddress в
             string[] splitFromAddress;
 
-            // First split the FromAddress between the @
+            // Спочатку розділіть FromAddress між @
             try
             {
                 splitFromAddress = FromAddress.Split('@');
             }
             catch (Exception exception)
             {
-                // Create the error message
+                // Створіть повідомлення про помилку
                 string ErrorMessage = "ERROR 60006" + "\n" + "FromAddress is empty." + exception.ToString();
 
-                // Show the error message
+                //Показати повідомлення про помилку
                 Program.ErrorPopupCall(ErrorMessage);
 
                 return false;
             }
 
-            // Then check if the splitFromAddress[1] exists
+            // Потім перевірте, чи існує splitFromAddress [1]
             if (splitFromAddress.Length == 2)
             {
-                // This switch checks which host it is, and assigns the Host and Port variables to the corresponding Host and Port
+                // Цей комутатор перевіряє, який це хост, і призначає змінні Host і Port відповідним Host і Port
                 switch (splitFromAddress[1])
                 {
                     case "gmail.com":
@@ -346,10 +346,10 @@ namespace MailClient
             }
         }
 
-    
+
 
         /// <summary>
-        /// First encrypts, and then saves the login credentials to a file
+        /// Спочатку шифрує, а потім зберігає облікові дані для входу у файл
         /// </summary>
         /// <param name="FromAddress">The FromAddress to be encrypted</param>
         /// <param name="FromPass">The FromPass to be encrypted</param>
@@ -360,49 +360,50 @@ namespace MailClient
             // Declare variables
             string EncryptedFromAddress, EncryptedFromPass;
 
-            // Create a new instance of the FileStream class
+            // Створіть новий екземпляр класу FileStream
             FileStream fileStream = File.OpenWrite(Path);
 
-            // Create a new instance of he BinaryWriter class
+            // Створіть новий екземпляр класу BinaryWriter
             BinaryWriter writer = new BinaryWriter(fileStream);
 
-            // Encrypt the FromAddress and Frompass
+            // Зашифруйте FromAddress та Frompass
             EncryptedFromAddress = EncryptionClass.Encrypt(FromAddress, EncryptionPassword);
             EncryptedFromPass = EncryptionClass.Encrypt(FromPass, EncryptionPassword);
 
-            // Write the credentials to the file
+            // Запишіть облікові дані у файл
             writer.Write(EncryptedFromAddress);
             writer.Write(EncryptedFromPass);
 
-            // Close the BinaryWriter
+            //Закриваємо BinaryWriter
             writer.Close();
         }
 
-        /// <summary>
-        /// Reads and decrypts the FromAddress and Frompass from the file where they're saved
-        /// </summary>
+        /// <резюме>
+        /// Читає та розшифровує FromAddress та Frompass з файлу, де вони збережені
+        /// </резюме>
         /// <param name="Path"></param>
         /// <param name="EncryptionPassword">The password used for the encryption</param>
         public static void ReadCredentialsFromFile(string Path, string EncryptionPassword)
         {
-            // Create a new instance of the FileStream class
+            //Створіть новий екземпляр класу FileStream
             FileStream fileStream = File.OpenRead(Path);
 
-            // Create a new instance of the BinaryReader class
+            // Створіть новий екземпляр класу BinaryReader
             BinaryReader reader = new BinaryReader(fileStream);
 
-            // Read the file
+            // Читаємо файл
             string EncryptedFromAddress = reader.ReadString();
             string EncryptedFromPass = reader.ReadString();
 
-            // Create an array to store the decrypted data in
+            //Створіть масив для зберігання розшифрованих даних
+
             string[] DecryptedData = new string[2];
 
-            // Decrypt the FromAddress and FromPass
+            // Розшифруємо  FromAddress and FromPass
             DecryptedData[0] = EncryptionClass.Decrypt(EncryptedFromAddress, EncryptionPassword);
             DecryptedData[1] = EncryptionClass.Decrypt(EncryptedFromPass, EncryptionPassword);
 
-            // Assign the variables
+            // Призначити зміни
             FromAddress = DecryptedData[0];
             FromPass = DecryptedData[1];
         }

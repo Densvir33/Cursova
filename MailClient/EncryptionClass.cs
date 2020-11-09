@@ -10,8 +10,7 @@ namespace MailClient
 {
     class EncryptionClass
     {
-        // Okay I'm sorry I have no idea how this works, I just copy pasted it from StackOverflow because I can't
-        // find a decent tutorial I understand. I did add the try/catch
+       
         private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("tu89geji340t89u2");
 
         private const int keysize = 256;
@@ -45,13 +44,13 @@ namespace MailClient
             }
             catch (Exception exception)
             {
-                // Create the ErrorMessage
+                
                 string ErrorMessage = "ERROR 40001:" + "\n" + exception.ToString();
 
-                // Show the ErrorMessage to the user
+         
                 Program.ErrorPopupCall(ErrorMessage);
 
-                // Stop executing this method
+          
                 return "";
             }
         }
@@ -84,13 +83,13 @@ namespace MailClient
             }
             catch (Exception exception)
             {
-                // Create the ErrorMessage
+               
                 string ErrorMessage = "ERROR 40002:" + "\n" + exception.ToString();
 
-                // Show the ErrorMessage to the user
+             
                 Program.ErrorPopupCall(ErrorMessage);
 
-                // Stop executing this method
+           
                 return "";
             }
         }
