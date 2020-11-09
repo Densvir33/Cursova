@@ -92,7 +92,7 @@ namespace MailClient
                 loginPopup.Show();
             }
         }
-
+        //Хто я ?
         /// <summary>
         /// Prepares variables to call SendEmail to and the email
         /// </summary>
