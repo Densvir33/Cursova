@@ -27,7 +27,7 @@ namespace MailClient
         }
 
         // Button _Click methods
-
+        //
         private void SendEmailButton_Click(object sender, RoutedEventArgs e)
         {
             // Create a new instance of MainWindow class

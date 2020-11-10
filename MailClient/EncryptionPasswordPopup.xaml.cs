@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+//
 namespace MailClient
 {
-    /// <summary>
+    /// <summar>
     /// Логика взаимодействия для EncryptionPasswordPopup.xaml
     /// </summary>
     public partial class EncryptionPasswordPopup : Window

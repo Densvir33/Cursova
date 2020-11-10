@@ -25,13 +25,9 @@ namespace MailClient
         private static int Port = 0;
         public static string FromAddress, FromPass;
 
-        //####################
-        //#Popup call methods#
-        //####################
+        
 
-        /// <summary>
-        /// Shows the EmailIsSentPopup popup
-        /// </summary>
+       
         public static void EmailIsSentPopupCall()
         {
             // Create a new instance of the class

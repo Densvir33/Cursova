@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 namespace MailClient
 {
-    
+    //
     public partial class EmailIsSentPopup : Window
     {
         public EmailIsSentPopup()

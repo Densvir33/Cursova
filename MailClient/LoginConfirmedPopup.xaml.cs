@@ -28,5 +28,5 @@ namespace MailClient
         {
             Close();
         }
-    }
+    }//
 }

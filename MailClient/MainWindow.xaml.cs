@@ -40,7 +40,7 @@ namespace MailClient
 
         private void BodyTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            //
         }
 
         /// <summary>
