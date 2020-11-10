@@ -40,81 +40,66 @@ namespace MailClient
 
         private void BodyTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //
+            
         }
 
-        /// <summary>
-        /// Exits the program when clicked
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        /// <summary>
-        /// When the AddAttachmentButton is clicked, show the AddAttachmentpopup
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+      
         private void AddAttachmentButton_Click(object sender, RoutedEventArgs e)
         {
             // Create a new instance of the AddAttachmentPopup
             AddAttachmentPopup popup = new AddAttachmentPopup();
 
-            // Show the popup
+            // Показаю спливаюче вікно
             popup.Show();
         }
 
-        /// <summary>
-        /// Logs in.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+       
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // If the credentials are saved, open those, else open the login popup
             if (File.Exists("Credentials") == true)
             {
-                // Ask the Encryption password using the EncryptionPasswordPopup
+                // Тут я  запитую пароль шифрування за допомогою EncryptionPasswordPopup
                 EncryptionPasswordPopup popup = new EncryptionPasswordPopup();
 
-                //Show the popup
+                //Показаю спливаюче вікно
                 popup.Show();
             }
             else
             {
-                // Create a new instance of the LoginPopup class
+
+                // відкриваю новий екземпляр LoginPopup class
                 LoginPopup loginPopup = new LoginPopup();
 
-                // Show the popup
+                // ну тут все логічно (Показаю спливаюче вікно)
                 loginPopup.Show();
             }
         }
         //Хто я ?
-        /// <summary>
-        /// Prepares variables to call SendEmail to and the email
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+      
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             if (!(string.IsNullOrEmpty(Program.FromAddress)))
             {
                 string ToAddress, Subject, Body, CC, S_Attachment;
 
-                // Assign the variables
+                // Тут призначаю зміни
                 ToAddress = ToAddressTextBox.Text;
                 Subject = SubjectTextBox.Text;
                 Body = BodyTextBox.Text;
                 CC = CCAddressTextBox.Text;
                 S_Attachment = AddAttachmentPopup.AttachmentPath;
 
-                // Call SendEmail to send the email
+                // нада нажать SendEmail, щоб надіслати електронне повідомлення(тут даже не буду казати хто догається)
                 Program.SendEmail(ToAddress, Program.FromAddress, Program.FromPass, Subject, Body, CC, S_Attachment);
 
-                // Close this window
+                // закриваю вікно
                 Close();
             }
             else

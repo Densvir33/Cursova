@@ -48,7 +48,7 @@
       <HintPath>..\packages\Consul.1.6.1.1\lib\net461\Consul.dll</HintPath>
     </Reference>
     <Reference Include="MailKit, Version=2.9.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
-      <HintPath>..\packages\MailKit.2.9.0\lib\net48\MailKit.dll</HintPath>
+      <HintPath>..\packages\MailKit.2.9.0\lib\net46\MailKit.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2230, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.0-ci2230\lib\net45\MaterialDesignColors.dll</HintPath>
@@ -57,7 +57,7 @@
       <HintPath>..\packages\MaterialDesignThemes.4.0.0-ci2230\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="MimeKit, Version=2.9.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
-      <HintPath>..\packages\MimeKit.2.9.2\lib\net48\MimeKit.dll</HintPath>
+      <HintPath>..\packages\MimeKit.2.9.2\lib\net46\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="S22.Imap, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\S22.Imap.3.6.0.0\lib\net40\S22.Imap.dll</HintPath>
