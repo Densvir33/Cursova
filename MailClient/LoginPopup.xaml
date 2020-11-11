@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MailClient"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="350">
-    <Grid>
+	<Grid  Background="LightSlateGray" >
         <Label x:Name="EmailLabel" Content="Email:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
         <TextBox x:Name="FromAddressTextBox" HorizontalAlignment="Left" Height="31" Margin="66,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontSize="16" TextChanged="FromAddressTextBox_TextChanged" TabIndex="1" ToolTip="Fill in your email address here."/>
         <Label x:Name="PasswordLabel" Content="Password:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
