@@ -330,6 +330,14 @@ namespace MailClient
                         Host = "imap-mail.outlook.com";
                         Port = 993;
                         return true;
+                    case "icloud.com":
+                        Host = "imap.mail.me.com";
+                        Port = 993;
+                        return true;
+                    case "mail.ru":
+                        Host = "imap.mail.ru";
+                        Port = 993;
+                        return true;
                     default:
                         ErrorPopupCall("ERROR 60004" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
                         return false;
