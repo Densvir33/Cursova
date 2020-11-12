@@ -326,10 +326,6 @@ namespace MailClient
                         Host = "imap-mail.outlook.com";
                         Port = 993;
                         return true;
-                    case "hotmail.nl":
-                        Host = "imap-mail.outlook.com";
-                        Port = 993;
-                        return true;
                     case "icloud.com":
                         Host = "imap.mail.me.com";
                         Port = 993;
