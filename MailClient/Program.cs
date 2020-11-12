@@ -307,7 +307,7 @@ namespace MailClient
 
                 return false;
             }
-            ///
+            
             // Потім перевірте, чи існує splitFromAddress [1]
             if (splitFromAddress.Length == 2)
             {
