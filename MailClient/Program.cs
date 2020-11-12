@@ -200,7 +200,7 @@ namespace MailClient
                         return true;
                     case "mail.ru":
                         Host = "smtp.mail.ru";
-                        Port = 587;
+                        Port = 465;
                         return true;
                     default:
                         ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
