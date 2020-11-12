@@ -118,7 +118,7 @@ namespace MailClient
 
                     // Додайте копію до повідомлення
                     Message.CC.Add(Copy);
-                }
+                } 
 
                 // Якщо щось є в S_Attachment, додайте це до повідомлення
                 if (!(string.IsNullOrEmpty(S_Attachment)))
