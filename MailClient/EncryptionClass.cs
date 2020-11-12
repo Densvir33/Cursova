@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
 
-//
+// на маю ідеї як работає просто взяв код з StackOverflow 
+//шоч я і шукав в інтернеті як це працює уви нічого не знайшов 
 namespace MailClient
 {
     class EncryptionClass
